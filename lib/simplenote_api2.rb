@@ -25,8 +25,8 @@ class SimpleNoteApi2
     @token
   end
 
-  def get_index
-    self.class.get "/api2/index", :query => request_hash, :format => :json
+  def get_index(options={})
+    self.class.get "/api2/index", :query => request_hash.merge(options), :format => :json
   end
 
   def get_note(key)
