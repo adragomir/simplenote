@@ -45,7 +45,7 @@ class SimpleNoteApi2
   end
 
   def update_note(key, content)
-    self.class.post "/api2/data/#{URI.encode(key)}", :query => request_hash, :body =>  {:content => content}.to_json
+    self.class.post "/api2/data/#{URI.encode(key)}", :query => request_hash, :body =>  {:content => content}.to_json, :format => :json
   end
   
   def create_note(content)
