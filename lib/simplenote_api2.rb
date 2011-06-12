@@ -44,12 +44,12 @@ class SimpleNoteApi2
     end
   end
 
-  def update_note(key, content)
-    self.class.post "/api2/data/#{URI.encode(key)}", :query => request_hash, :body =>  {:content => content}.to_json, :format => :json
+  def update_note(key, content_hash)
+    self.class.post "/api2/data/#{URI.encode(key)}", :query => request_hash, :body =>  content_hash.to_json, :format => :json
   end
   
-  def create_note(content)
-    self.class.post "/api2/data", :query => request_hash, :body => {:content => content}.to_json, :format => :json
+  def create_note(hash)
+    self.class.post "/api2/data", :query => request_hash, :body => hash.to_json, :format => :json
   end
 
 

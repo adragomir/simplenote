@@ -33,7 +33,7 @@ class SimpleNoteApi2Test < Test::Unit::TestCase
     should "create, list, fetch and delete a note" do
       VCR.use_cassette('api2/create_note', :record => :none) do
 
-        created_note = @simplenote.create_note("A test note")
+        created_note = @simplenote.create_note(:content => "A test note")
 
         index = @simplenote.get_index
         assert_not_nil( index['data'].detect{|i|i['key'] == created_note['key']})
@@ -46,12 +46,12 @@ class SimpleNoteApi2Test < Test::Unit::TestCase
     end
 
     should "update a note" do
-      VCR.use_cassette('api2/update_note', :record => :none) do
-        key = @simplenote.create_note("A test note")['key']
-        @simplenote.update_note(key, "The new content")
+      VCR.use_cassette('api2/update_note', :record => :once) do
+        key = @simplenote.create_note(:content => "A test note")['key']
+        @simplenote.update_note(key, {:content => "The new content ish"})
 
         note = @simplenote.get_note(key)
-        assert_equal "The new content", note['content']
+        assert_equal "The new content ish", note['content']
 
         @simplenote.delete_note(key)
       end
