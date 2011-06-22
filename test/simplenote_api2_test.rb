@@ -20,9 +20,9 @@ class SimpleNoteApi2Test < Test::Unit::TestCase
       end
     end
 
-    should "raise when login fails" do
+    should "raise SimpleNoteLoginError when login fails" do
       VCR.use_cassette('api2/login_failure', :record => :none) do
-        error = assert_raises RuntimeError do
+        error = assert_raises SimpleNoteLoginError do
           @simplenote = SimpleNoteApi2.new("simplenotetest@mailinator.com", "not my password!")
           @simplenote.login
         end
