@@ -4,8 +4,16 @@ require 'crack'
 
 require File.join(File.expand_path('..', __FILE__), 'simplenote_api2')
 
+
+class JsonParser < HTTParty::Parser
+  def json
+    ::JSON.parse(body)
+  end
+end
+
 class SimpleNote
   include HTTParty
+  parser JsonParser
   attr_reader :token, :email
   format :json
   base_uri 'https://simple-note.appspot.com/api'
