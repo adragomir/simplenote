@@ -1,6 +1,6 @@
 require 'httparty'
 require 'base64'
-require 'crack'
+require 'json'
 
 require File.join(File.expand_path('..', __FILE__), 'simplenote_api2')
 
